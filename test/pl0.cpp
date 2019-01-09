@@ -8,11 +8,7 @@
 （3）增加类型：① 字符类型； 
  (4) 增加 注释; 注释由/和/包含； 
 （5）增加运算：++ 和 --。
---------------------- 
-作者：Ahoob 
-来源：CSDN 
-原文：https://blog.csdn.net/ahoob/article/details/44519687 
-版权声明：本文为博主原创文章，转载请附上博文链接！
+
 *使用方法:
 *运行后输入PL/0 源程序文件名
 *回答是否输出虚拟机代码
@@ -21,7 +17,6 @@
 *fa1.tmp  输出源文件及其各行对应的首地址
 *fa2.tmp  输出结果 
 *fas.tmp  输出名字表
-*     @author:zzh
 */
 #include <stdio.h>
 #include "pl0.h"
@@ -112,7 +107,7 @@ void init()
     ssym['='] = eql;
     ssym[','] = comma;
     ssym['.'] = period;
-    //ssym['#']=neq;  //去掉原先单字符‘#’的设置部分
+    // ssym['#']=neq;  //去掉原先单字符‘#’的设置部分
     ssym[';'] = semicolon;
     /*设置保留字名字,按照字母顺序,便于折半查找*/
     strcpy(&(word[0][0]), "begin");
@@ -178,11 +173,13 @@ void init()
     declbegsys[varsym] = true;
     declbegsys[procsym] = true;
     declbegsys[charsym] = true; //增加声明开始符号charsym
+
     /*设置语句开始符号集*/
     statbegsys[beginsym] = true;
     statbegsys[callsym] = true;
     statbegsys[ifsym] = true;
     statbegsys[whilesym] = true;
+
     /*设置因子开始符号集*/
     facbegsys[ident] = true;
     facbegsys[number] = true;
@@ -191,7 +188,7 @@ void init()
     facbegsys[minusminus] = true; //增加开始因子minusminus
     facbegsys[charsym] = true;    //增加开始因子charsym
 }
-/*
+ /*
   *用数组实现集合的集合运算
   */
 int inset(int e, bool *s)
@@ -229,7 +226,6 @@ int mulset(bool *sr, bool *s1, bool *s2, int n)
  *出错处理，打印出错位置和错误编码
  */
 void error(int n)
-
 {
     char space[81];
     memset(space, 32, 81);
@@ -279,9 +275,9 @@ int getch()
     cc++;
     return 0;
 }
+
 /*词法分析，获取一个符号
  */
-
 int getsym()
 {
     int i, j, k;
@@ -538,6 +534,7 @@ int gen(enum fct x, int y, int z)
     cx++;
     return 0;
 }
+
 /*
 *测试当前符号是否合法
 *
@@ -550,7 +547,6 @@ int gen(enum fct x, int y, int z)
 *s2:如果不是我们需要的，则需要一个补救用的集合
 *n:错误号
 */
-
 int test(bool *s1, bool *s2, int n)
 {
     if (!inset(sym, s1))
@@ -841,7 +837,7 @@ int constdeclaration(int *ptx, int lev, int *pdx)
     return 0;
 }
 /*
- *
+ *变量声明处理
  */
 int vardeclaration(int *ptx, int lev, int *pdx)
 {
@@ -857,7 +853,7 @@ int vardeclaration(int *ptx, int lev, int *pdx)
     return 0;
 }
 /*
- *字符型声明
+ *字符型声明(修改)
  */
 int chardeclaration(int *ptx, int lev, int *pdx)
 {
@@ -1185,12 +1181,12 @@ int statement(bool *fsys, int *ptx, int lev)
 
     else
     {
-        if (sym == readsym)
+        if (sym == readsym) /* 准备按照read语句处理 */
         {
             getsymdo;
             if (sym != lparen)
             {
-                error(34);
+                error(34); /* 格式错误，应是左括号 */
             }
             else
             {

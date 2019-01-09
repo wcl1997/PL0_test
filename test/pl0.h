@@ -11,15 +11,15 @@
 //增加单词:保留字 ELSE，FOR，TO，DOWNTO，RETURN
 //运算符 *=，/=，++，--
 enum symbol{
-     nul,    ident,     number,     plus,     minus,
-     times,   slash,   oddsym,   eql,     neq,
-lss,     leq,      gtr,     geq,     lparen,
-rparen,  comma,   semicolon,period,  becomes,
-beginsym, endsym, ifsym,    thensym,  whilesym,
-writesym, readsym,  dosym,  callsym,  constsym,
-varsym,  procsym, elsesym, forsym, tosym, downtosym, 
-returnsym , timeseql, slasheql, plusplus, minusminus,
-charsym,
+   nul,    ident,     number,     plus,     minus,
+   times,   slash,   oddsym,   eql,     neq,
+   lss,     leq,      gtr,     geq,     lparen,
+   rparen,  comma,   semicolon,period,  becomes,
+   beginsym, endsym, ifsym,    thensym,  whilesym,
+   writesym, readsym,  dosym,  callsym,  constsym,
+   varsym,  procsym, elsesym, forsym, tosym, downtosym, 
+   returnsym , timeseql, slasheql, plusplus, minusminus,
+   charsym,
 };
 #define symnum 42    //符号数初始值由32增加至42
 /*-------------*/
@@ -44,30 +44,31 @@ struct instruction
   //double a;//实型字符型修改
 };
 
-FILE * fas;
-FILE * fa;
-FILE * fa1;
-FILE * fa2;
+FILE* fas;  /* 输出名字表 */
+FILE* fa;   /* 输出虚拟机代码 */
+FILE* fa1;  /* 输出源文件及其各行对应的首地址 */
+FILE* fa2;  /* 输出结果 */
 
-bool tableswitch;
-bool listswitch;
-char ch;
-enum symbol sym;
-char id[al+1];
-int  num;
-int cc,ll;
-int cx;
-char line[81];
-char a[al+1];
-struct instruction code[cxmax];
-char word[norw][al];
-enum symbol wsym[norw];
-enum symbol ssym[256];
-char mnemonic[fctnum][5];
-bool declbegsys[symnum];
-bool statbegsys[symnum];
-bool facbegsys[symnum];
-/*------------------------------*/
+bool listswitch;    /* 显示虚拟机代码与否 */
+bool tableswitch;   /* 显示名字表与否 */
+char ch;            /* 获取字符的缓冲区，getch 使用 */
+enum symbol sym;    /* 当前的符号 */
+char id[al+1];      /* 当前ident, 多出的一个字节用于存放0 */
+int num;            /* 当前number */
+int cc, ll;          /* getch使用的计数器，cc表示当前字符(ch)的位置 */
+int cx;             /* 虚拟机代码指针, 取值范围[0, cxmax-1]*/
+char line[81];      /* 读取行缓冲区 */
+char a[al+1];       /* 临时符号, 多出的一个字节用于存放0 */
+struct instruction code[cxmax]; /* 存放虚拟机代码的数组 */
+char word[norw][al];        /* 保留字 */
+enum symbol wsym[norw];     /* 保留字对应的符号值 */
+enum symbol ssym[256];      /* 单字符的符号值 */
+char mnemonic[fctnum][5];   /* 虚拟机代码指令名称 */
+bool declbegsys[symnum];    /* 表示声明开始的符号集合 */
+bool statbegsys[symnum];    /* 表示语句开始的符号集合 */
+bool facbegsys[symnum];     /* 表示因子开始的符号集合 */
+
+/* 名字表结构 */
 struct tablestruct
 {
    char name[al];                            /*名字*/
