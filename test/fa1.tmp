@@ -1,18 +1,16 @@
 Iput pl/0 file ?y
-0 var x;
-
-1 char y;
+0 var x,y;
 
 1 begin
 
-2 x := 6;
+2 x := 2;
 
-4 y := 'a';
+4 y := 3;
 
-6 / write(y); /
+6 x *= y;
 
-6 write(x);
+10 /*write(y);*/
 
-6 write(y);
+10 write(x);
 
-9 end.
+13 end.

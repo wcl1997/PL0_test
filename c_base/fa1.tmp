@@ -1,0 +1,10 @@
+Input pl/0 file?   y
+0 var x;
+
+1 begin
+
+2 x := 5+2;
+
+6 write(x);
+
+9 end.
