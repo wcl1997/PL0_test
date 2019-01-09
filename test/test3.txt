@@ -1,0 +1,9 @@
+var x;
+char y;
+begin
+x := 6;
+y := 'a';
+/write(y);/
+write(x);
+write(y);
+end.

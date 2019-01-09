@@ -1,0 +1,7 @@
+var x,y,z;
+begin
+x:=2;
+y:=4;
+for z:=5 downto 2 do y--;
+write(y);
+end.

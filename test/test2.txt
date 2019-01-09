@@ -1,0 +1,5 @@
+char x;
+begin
+x := 'a';
+write(x);
+end.
