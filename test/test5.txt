@@ -1,0 +1,16 @@
+var a,b;
+begin
+    a := 5;
+    b := 6;
+    if a<>b then
+        if a>b then
+            begin
+            write(a);
+            end
+        else if a<b then
+            begin
+            write(b);
+            end
+    else
+        write(-1);
+end.

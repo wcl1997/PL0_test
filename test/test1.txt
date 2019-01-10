@@ -1,7 +1,9 @@
-var x,y,z;
+var x,y;
 begin
 x:=2;
 y:=4;
-for z:=5 downto 2 do y--;
+y/=x;
+x*=y;
+write(x);
 write(y);
 end.

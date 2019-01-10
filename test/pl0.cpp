@@ -1,13 +1,14 @@
 /*
-(1)扩充赋值运算：*= 和 /= 
+(1)扩充赋值运算：*= 和 /= 和 <>(不等于)
 (2)扩充语句（Pascal的FOR语句）: 
-    ①FOR <变量>:=<表达式> TO <表达式> DO <语句> 
-    ②FOR <变量>:=<表达式> DOWNTO <表达式> DO <语句> 
-    其中，语句①的循环变量的步长为1， 
-    语句②的循环变量的步长为-1。 
-（3）增加类型：① 字符类型； 
- (4) 增加 注释; 注释由/和/包含； 
+    1)FOR <变量>:=<表达式> TO <表达式> DO <语句> 
+    2)FOR <变量>:=<表达式> DOWNTO <表达式> DO <语句> 
+    其中，语句1的循环变量的步长为1， 
+    语句2的循环变量的步长为-1。 
+（3）增加类型：字符类型； 
+ (4) 增加 注释; 注释由/*和/包含； 
 （5）增加运算：++ 和 --。
+（6）else 操作
 
 *使用方法:
 *运行后输入PL/0 源程序文件名
@@ -236,9 +237,7 @@ void error(int n)
 }
 /*
  *  漏掉空格，读取一个字符
- *
  *  每次读一行，存入line缓冲区，line被getsym取空后再读一行
- *
  *  被函数getsym调用
  */
 int getch()
@@ -1326,7 +1325,7 @@ int statement(bool *fsys, int *ptx, int lev)
                         //{
                         //  getsymdo;
                         //}
-                        if (sym == elsesym) /*than语句后面发现else*/
+                        if (sym == elsesym) /*then语句后面发现else*/
                         {
                             getsymdo;
                             cx2 = cx;
@@ -1615,7 +1614,7 @@ int factor(bool *fsys, int *ptx, int lev)
                         error(22); /*缺少右括号*/
                     }
                 }
-                testdo(fsys, facbegsys, 23); /*银子后有非法符号*/
+                testdo(fsys, facbegsys, 23); /*因子后有非法符号*/
             }
         }
     }
@@ -1676,8 +1675,9 @@ int condition(bool *fsys, int *ptx, int lev)
         }
     }
     return 0;
-} /*解释程序*/
+} 
 
+/*解释程序*/
 void interpret()
 {
     int p, b, t;          /*指令指针，指令基址，栈顶指针*/

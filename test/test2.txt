@@ -1,5 +1,9 @@
-char x;
+var x,y;
 begin
-x := 'a';
+x := 3;
+y := 5;
+x:=x+++++x;
+y:=--y+y--;
 write(x);
+write(y);
 end.

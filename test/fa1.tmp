@@ -1,16 +1,33 @@
 Iput pl/0 file ?y
-0 var x,y;
+0 var a,b;
 
 1 begin
 
-2 x := 2;
+2     a := 5;
 
-4 y := 3;
+4     b := 6;
 
-6 x *= y;
+6     if a<>b then
 
-10 /*write(y);*/
+9         if a>b then
 
-10 write(x);
+13             begin
 
-13 end.
+14             write(a);
+
+17             end
+
+17         else if a<b then
+
+21             begin
+
+22             write(b);
+
+25             end
+
+25     else
+
+25         write(-1);
+
+30 end.
+
